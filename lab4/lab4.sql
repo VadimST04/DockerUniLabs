@@ -5,7 +5,7 @@ LIMIT 5 OFFSET 5;
 
 SELECT name, CHAR_LENGTH(name) AS length
 FROM cities
-WHERE LENGTH(name) NOT IN (8, 9, 10);
+WHERE CHAR_LENGTH(name) NOT IN (8, 9, 10);
 
 SELECT SUM(population) AS 'sum of population in C and S'
 FROM cities
