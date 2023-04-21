@@ -66,8 +66,8 @@ INSERT INTO `stations` (`id`, `name`, `next_id`, `prev_id`, `branch_id`) VALUES
 
 DROP TABLE IF EXISTS `transitions`;
 CREATE TABLE `transitions` (
-  `station_from_id` int(10) unsigned DEFAULT NULL,
-  `station_to_id` int(10) unsigned DEFAULT NULL,
+  `station_from_id` int(10) unsigned NOT NULL,
+  `station_to_id` int(10) unsigned NOT NULL,
   KEY `station_from_id` (`station_from_id`),
   KEY `station_to_id` (`station_to_id`),
   CONSTRAINT `transitions_ibfk_1` FOREIGN KEY (`station_from_id`) REFERENCES `stations` (`id`),
@@ -82,4 +82,4 @@ INSERT INTO `transitions` (`station_from_id`, `station_to_id`) VALUES
 (23,	13),
 (24,	6);
 
--- 2023-04-21 06:54:59
+-- 2023-04-21 07:04:43
