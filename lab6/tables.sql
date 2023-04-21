@@ -9,13 +9,13 @@ SET NAMES utf8mb4;
 
 DROP TABLE IF EXISTS `branches`;
 CREATE TABLE `branches` (
-  `branch_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`branch_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `branches` (`branch_id`, `name`, `color`) VALUES
+INSERT INTO `branches` (`id`, `name`, `color`) VALUES
 (1,	'Олексіївська',	'Зелений'),
 (2,	'Холодногірсько-заводська',	'Червоний'),
 (3,	'Салтівська',	'Блакитний');
@@ -24,15 +24,15 @@ DROP TABLE IF EXISTS `stations`;
 CREATE TABLE `stations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `next_id` tinyint(3) unsigned DEFAULT NULL,
-  `prev_id` tinyint(3) unsigned DEFAULT NULL,
-  `branch` int(10) unsigned DEFAULT NULL,
+  `next_id` int(10) unsigned DEFAULT NULL,
+  `prev_id` int(10) unsigned DEFAULT NULL,
+  `branch_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `branch` (`branch`),
-  CONSTRAINT `stations_ibfk_1` FOREIGN KEY (`branch`) REFERENCES `branches` (`branch_id`) ON DELETE NO ACTION
+  KEY `branch_id` (`branch_id`),
+  CONSTRAINT `stations_ibfk_1` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `stations` (`id`, `name`, `next_id`, `prev_id`, `branch`) VALUES
+INSERT INTO `stations` (`id`, `name`, `next_id`, `prev_id`, `branch_id`) VALUES
 (1,	'Перемога',	2,	NULL,	1),
 (2,	'Олексіївська',	3,	1,	1),
 (3,	'23 серепня',	4,	2,	1),
@@ -82,4 +82,4 @@ INSERT INTO `transitions` (`station_from_id`, `station_to_id`) VALUES
 (23,	13),
 (24,	6);
 
--- 2023-04-21 06:47:21
+-- 2023-04-21 06:54:59
